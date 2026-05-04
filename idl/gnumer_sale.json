@@ -1,0 +1,609 @@
+{
+  "address": "9rckADaKzwyoRDmLDzQWANLTzFM3WX9rdRuspkUVymCX",
+  "metadata": {
+    "name": "gnumer_sale",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "buy",
+      "discriminator": [
+        102,
+        6,
+        61,
+        18,
+        1,
+        218,
+        235,
+        234
+      ],
+      "accounts": [
+        {
+          "name": "buyer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "sale_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "mint_authority",
+          "docs": [
+            "PDA mint authority.",
+            "It signs Token-2022 mint_to and set_authority CPI calls."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          },
+          "relations": [
+            "sale_state"
+          ]
+        },
+        {
+          "name": "gnumer_mint",
+          "writable": true,
+          "relations": [
+            "sale_state"
+          ]
+        },
+        {
+          "name": "buyer_gnumer_ata",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "buyer"
+              },
+              {
+                "kind": "account",
+                "path": "token_program"
+              },
+              {
+                "kind": "account",
+                "path": "gnumer_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "treasury_wallet",
+          "docs": [
+            "Multisig treasury wallet.",
+            "It is checked against sale_state.treasury_wallet.",
+            "SOL is transferred directly into this account."
+          ],
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "pay_lamports",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "sale_state",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  97,
+                  108,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "initializer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "mint_authority",
+          "docs": [
+            "PDA mint authority.",
+            "It does not store data.",
+            "It only signs Token-2022 CPI calls."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  109,
+                  105,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "gnumer_mint",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "treasury_wallet",
+          "type": "pubkey"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "SaleState",
+      "discriminator": [
+        21,
+        13,
+        249,
+        194,
+        208,
+        96,
+        243,
+        65
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "Bought",
+      "discriminator": [
+        193,
+        56,
+        215,
+        24,
+        156,
+        76,
+        42,
+        104
+      ]
+    },
+    {
+      "name": "Initialized",
+      "discriminator": [
+        208,
+        213,
+        115,
+        98,
+        115,
+        82,
+        201,
+        209
+      ]
+    },
+    {
+      "name": "MintAuthorityPdaRecovered",
+      "discriminator": [
+        191,
+        208,
+        198,
+        86,
+        123,
+        88,
+        253,
+        57
+      ]
+    },
+    {
+      "name": "MintAuthorityRevoked",
+      "discriminator": [
+        2,
+        222,
+        125,
+        58,
+        108,
+        126,
+        254,
+        121
+      ]
+    },
+    {
+      "name": "SaleClosed",
+      "discriminator": [
+        159,
+        55,
+        174,
+        68,
+        129,
+        10,
+        121,
+        96
+      ]
+    },
+    {
+      "name": "SaleStateClosed",
+      "discriminator": [
+        3,
+        203,
+        75,
+        62,
+        110,
+        93,
+        177,
+        136
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "UnauthorizedInitializer",
+      "msg": "Unauthorized initializer."
+    },
+    {
+      "code": 6001,
+      "name": "SaleClosed",
+      "msg": "Sale is already closed."
+    },
+    {
+      "code": 6002,
+      "name": "AmountTooSmall",
+      "msg": "Payment amount is too small. Minimum buy is 1 SOL."
+    },
+    {
+      "code": 6003,
+      "name": "AmountTooLarge",
+      "msg": "Payment amount is too large."
+    },
+    {
+      "code": 6004,
+      "name": "SaleCapReached",
+      "msg": "Sale cap has already been reached."
+    },
+    {
+      "code": 6005,
+      "name": "MathOverflow",
+      "msg": "Math overflow."
+    },
+    {
+      "code": 6006,
+      "name": "InvalidMintDecimals",
+      "msg": "Invalid mint decimals."
+    },
+    {
+      "code": 6007,
+      "name": "InvalidMintAuthority",
+      "msg": "Invalid mint authority."
+    },
+    {
+      "code": 6008,
+      "name": "InvalidFreezeAuthority",
+      "msg": "Invalid freeze authority. Freeze authority must be disabled."
+    },
+    {
+      "code": 6009,
+      "name": "MintAuthorityAlreadyRevoked",
+      "msg": "Mint authority has already been revoked."
+    },
+    {
+      "code": 6010,
+      "name": "InvalidTreasuryWallet",
+      "msg": "Invalid treasury wallet."
+    },
+    {
+      "code": 6011,
+      "name": "InvalidPdaOwner",
+      "msg": "Invalid PDA owner."
+    }
+  ],
+  "types": [
+    {
+      "name": "Bought",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "buyer",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "sol_paid_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "gnumer_minted",
+            "type": "u64"
+          },
+          {
+            "name": "total_raised_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "treasury_balance_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "total_spent_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Initialized",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initializer",
+            "type": "pubkey"
+          },
+          {
+            "name": "gnumer_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "sale_cap_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MintAuthorityPdaRecovered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "treasury_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MintAuthorityRevoked",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "gnumer_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "total_raised_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "treasury_balance_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "total_spent_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleState",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initializer",
+            "type": "pubkey"
+          },
+          {
+            "name": "gnumer_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "mint_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_raised_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "treasury_balance_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "total_spent_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "is_closed",
+            "type": "bool"
+          },
+          {
+            "name": "mint_authority_revoked",
+            "type": "bool"
+          },
+          {
+            "name": "sale_state_closed",
+            "type": "bool"
+          },
+          {
+            "name": "state_bump",
+            "type": "u8"
+          },
+          {
+            "name": "mint_authority_bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SaleStateClosed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "treasury_wallet",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

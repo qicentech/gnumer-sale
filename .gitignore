@@ -1,0 +1,17 @@
+node_modules/
+target/
+.anchor/
+.env
+*.log
+
+# Never commit private keys
+*keypair*.json
+*wallet*.json
+id.json
+wallet.json
+**/id.json
+**/wallet.json
+target/deploy/*.json
+
+# Keep public IDL
+!idl/*.json

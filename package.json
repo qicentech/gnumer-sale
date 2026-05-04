@@ -1,0 +1,15 @@
+{
+  "name": "gnumer-sale-public",
+  "version": "1.0.0",
+  "private": false,
+  "scripts": {
+    "build": "anchor build",
+    "build:verifiable": "anchor build --verifiable"
+  },
+  "devDependencies": {
+    "@coral-xyz/anchor": "0.32.1",
+    "@solana/spl-token": "latest",
+    "typescript": "latest",
+    "ts-node": "latest"
+  }
+}
