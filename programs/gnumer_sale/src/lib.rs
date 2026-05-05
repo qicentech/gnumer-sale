@@ -215,7 +215,7 @@ let mint_amount = mint_amount_u128 as u64;
         });
 
         // New close condition:
-        // sale closes when the treasury wallet actual balance reaches 2500 SOL.
+        // sale closes when the treasury wallet actual balance reaches 3000 SOL.
         if treasury_balance_after >= SALE_CAP_LAMPORTS {
             finalize_sale_and_close_all_pdas(
                 &mut ctx,
