@@ -1,7 +1,13 @@
-.anchor
+target/
+node_modules/
+.env
+.env.*
+*.log
 .DS_Store
-target
-**/*.rs.bk
-node_modules
-test-ledger
-.yarn
+
+# Solana / Anchor private keys
+**/*keypair*.json
+**/*wallet*.json
+id.json
+my-wallet.json
+target/deploy/*-keypair.json
